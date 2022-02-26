@@ -56,7 +56,31 @@ export default function Calculator() {
 	}
 
 	const compute = () => {
+		let result
+		let previousNumber = parseFloat(previous)
+		let currentNumber = parseFloat(current)
 
+		// If the previous or current number are not actual numbers then stop
+		if(isNaN(previousNumber) || isNaN(currentNumber)) return
+
+		switch(operation) {
+			case '÷':
+				result = previousNumber / currentNumber;
+				break;
+			case '×':
+				result = previousNumber * currentNumber;
+				break;
+			case '+':
+				result = previousNumber + currentNumber;
+				break;
+			case '-':
+				result = previousNumber - currentNumber;
+				break;
+			default:
+				return
+		}
+
+		return result;
 	}
 
 	return (
@@ -65,13 +89,13 @@ export default function Calculator() {
 				<Previous>{previous} {operation}</Previous>
 				<Current>{current}</Current>
 			</Screen>
-			<Button onClick={handleAllClear} gridSpan={2}>AC</Button>
+			<Button onClick={handleAllClear} gridSpan={2} control>AC</Button>
 			<Button onClick={handleDelete} control>DEL</Button>
 			<Button data={'÷'} onClick={chooseOperation} operation>÷</Button>
 			<Button data={'7'} onClick={appendValue}>7</Button>
 			<Button data={'8'} onClick={appendValue}>8</Button>
 			<Button data={'9'} onClick={appendValue}>9</Button>
-			<Button data={'x'} onClick={chooseOperation} operation>×</Button>
+			<Button data={'×'} onClick={chooseOperation} operation>×</Button>
 			<Button data={'4'} onClick={appendValue}>4</Button>
 			<Button data={'5'} onClick={appendValue}>5</Button>
 			<Button data={'6'} onClick={appendValue}>6</Button>
