@@ -28,6 +28,37 @@ export default function Calculator() {
 		setOperation('');
 	}
 
+	const chooseOperation = (el) => {
+		// If the current value's has nothing in it, do nothing
+		if(current === '') return;
+
+		/* If previous is not empty then create variable called value and 
+		compute that value with the two numbers and come back with result 
+		and set previous with that result*/
+		if(previous !== '') {
+			let value = compute();
+			setPrevious(value);
+		} else {
+			setPrevious(current);
+		}
+
+		setCurrent('');
+		setOperation(el.target.getAttribute('data'));
+	}
+
+	const equals = () => {
+		let value = compute();
+		if(value == undefined || value == null) return;
+
+		setCurrent(value);
+		setPrevious('');
+		setOperation('');
+	}
+
+	const compute = () => {
+
+	}
+
 	return (
 		<Container>
 			<Screen>
@@ -36,22 +67,22 @@ export default function Calculator() {
 			</Screen>
 			<Button onClick={handleAllClear} gridSpan={2}>AC</Button>
 			<Button onClick={handleDelete} control>DEL</Button>
-			<Button operation>÷</Button>
+			<Button data={'÷'} onClick={chooseOperation} operation>÷</Button>
 			<Button data={'7'} onClick={appendValue}>7</Button>
 			<Button data={'8'} onClick={appendValue}>8</Button>
 			<Button data={'9'} onClick={appendValue}>9</Button>
-			<Button operation>×</Button>
+			<Button data={'x'} onClick={chooseOperation} operation>×</Button>
 			<Button data={'4'} onClick={appendValue}>4</Button>
 			<Button data={'5'} onClick={appendValue}>5</Button>
 			<Button data={'6'} onClick={appendValue}>6</Button>
-			<Button operation>+</Button>
+			<Button data={'+'} onClick={chooseOperation} operation>+</Button>
 			<Button data={'1'} onClick={appendValue}>1</Button>
 			<Button data={'2'} onClick={appendValue}>2</Button>
 			<Button data={'3'} onClick={appendValue}>3</Button>
-			<Button operation>-</Button>
+			<Button data={'-'} onClick={chooseOperation} operation>-</Button>
 			<Button data={'.'} period onClick={appendValue}>.</Button>
 			<Button data={'0'} onClick={appendValue}>0</Button>
-			<Button gridSpan={2}>=</Button>
+			<Button gridSpan={2} onClick={equals} equals>=</Button>
 		</Container>
 	)
 }
