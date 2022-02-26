@@ -3,7 +3,9 @@ import { Container, Screen, Previous, Current, Button } from './Styled';
 
 export default function Calculator() {
 
+	const [previous, setPrevious] = useState('');
 	const [current, setCurrent] = useState('');
+	const [operation, setOperation] = useState('');
 
 	const appendValue = (el) => {
 		// Make the value being passed in equal to the element that's being clicked on 
@@ -15,14 +17,25 @@ export default function Calculator() {
 		
 	}	
 
+	const handleDelete = () => {
+		setCurrent(String(current).slice(0, -1));
+	}
+
+	// Set all states back to empty strings when all clear is clicked
+	const handleAllClear = (el) => {
+		setCurrent('');
+		setPrevious('');
+		setOperation('');
+	}
+
 	return (
 		<Container>
 			<Screen>
-				<Previous></Previous>
+				<Previous>{previous} {operation}</Previous>
 				<Current>{current}</Current>
 			</Screen>
-			<Button gridSpan={2}>AC</Button>
-			<Button control>DEL</Button>
+			<Button onClick={handleAllClear} gridSpan={2}>AC</Button>
+			<Button onClick={handleDelete} control>DEL</Button>
 			<Button operation>÷</Button>
 			<Button data={'7'} onClick={appendValue}>7</Button>
 			<Button data={'8'} onClick={appendValue}>8</Button>
