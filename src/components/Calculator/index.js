@@ -1,8 +1,13 @@
 import React from 'react';
-import { Container } from './Styled';
+import { Container, Screen, Previous, Current } from './Styled';
 
 export default function Calculator() {
 	return (
-		<Container />
+		<Container>
+			<Screen>
+				<Previous></Previous>
+				<Current></Current>
+			</Screen>
+		</Container>
 	)
 }
